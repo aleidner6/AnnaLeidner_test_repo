@@ -60,8 +60,6 @@ Before starting your assignment, you need to get yourself set up on GitHub and m
 * As you work through your homework, save and commit often, push changes occasionally (maybe after you feel finished with an exercise?), and go check to see what the .md file looks like on GitHub.  
 * If you have issues, let me know! This is new to many of you and may not be intuitive at first. But, I promise, you'll get the hang of it! 
 
-
-
 ## Instructions
 
 * Put your name at the top of the document. 
@@ -101,19 +99,29 @@ garden_harvest %>%
   mutate(wt_lbs = weight * 0.00220462) %>%
   summarize(total_wt = sum(wt_lbs)) %>%
   left_join(garden_planting, 
-            by = c("vegetable", "variety")) %>%
-  arrange(plot)
+            by = c("vegetable", "variety")) 
 ```
 When planting, the same variety of some vegetables were planted in multiple different planter boxes so the “plot” data doesn’t match up perfectly. Instead, there could be a separate row for each vegetable and variety by where it was plotted. 
 
   3. I would like to understand how much money I "saved" by gardening, for each vegetable type. Describe how I could use the `garden_harvest` and `garden_spending` datasets, along with data from somewhere like [this](https://products.wholefoodsmarket.com/search?sort=relevance&store=10542) to answer this question. You can answer this in words, referencing various join functions. You don't need R code but could provide some if it's helpful.
-
-Use garden_harvest and garden_spending. Use the price_with_tax and the count of vegetable by variety. Multiply the price_with_tax by the number of vegetables by variety and that should find how much money was saved.
+  
+You could use the `garden_spending data` to find the total amount spent to grow/harvest each vegetable. Then, using `garden_harvest` you could find the total weight in grams for each vegetable. You could then combine those datasets using left_join. Using data found at a produce price site, you could then find how much each vegetable type costs per unit or pound. Somewhere along the way, the units would likely all have to be converted to grams or kg or lbs. Then, combining the newfound data with the new dataset we created, you could multiply the total weight of the vegetable type harvested by the price per unit. Finally, you would have to subtract how much you spent planting and harvesting that vegetable to find how much money was saved for each vegetable type.
 
 ```{r}
+garden_spending_tot <- garden_spending %>%
+  group_by(vegetable) %>%
+  mutate(total_spending = sum(price_with_tax)) %>%
+  select(vegetable, total_spending) %>%
+  slice(1)
 
+garden_harvest %>%
+  group_by(vegetable) %>%
+  mutate(total_weight_g = sum(weight)) %>%
+  select(vegetable, total_weight_g ) %>%
+  slice(1) %>%
+  left_join(garden_spending_tot, 
+            by = c("vegetable"))
 ```
-
   4. Subset the data to tomatoes. Reorder the tomato varieties from smallest to largest first harvest date. Create a barplot of total harvest in pounds for each variety, in the new order.CHALLENGE: add the date near the end of the bar. (This is probably not a super useful graph because it's difficult to read. This is more an exercise in using some of the functions you just learned.)
 
 ```{r}
@@ -141,7 +149,6 @@ garden_harvest %>%
   mutate(length_variety = str_length(variety)) %>%
   distinct(low_variety, vegetable, .keep_all = TRUE) %>%
   arrange(-desc(length_variety))
-
 ```
 
   6. In the `garden_harvest` data, find all distinct vegetable varieties that have "er" or "ar" in their name. HINT: `str_detect()` with an "or" statement (use the | for "or") and `distinct()`.
@@ -198,7 +205,7 @@ Trips %>%
   ggplot(aes(x = sdate)) +
   geom_density() +
   labs(title = "Density of Bike Rentals Between October and January", 
-       x = "Date", 
+       x = "Month", 
        y = "Density of Bike Rentals") +
   theme(plot.background = element_rect(fill = "snow1"),
         text = element_text(family = "Times")) 
@@ -214,7 +221,7 @@ Trips %>%
   ggplot(aes(x = t_day)) +
   geom_density() +
   labs(title = "Density of Bike Rentals Throughout 24 Hours", 
-       x = "Time of Day", 
+       x = "Time of Day (hr)", 
        y = "Density of Bike Rentals") +
   theme(plot.background = element_rect(fill = "snow1"),
         text = element_text(family = "Times")) 
@@ -223,12 +230,14 @@ Trips %>%
   9. A bar graph of the events versus day of the week. Put day on the y-axis.
   
 ```{r}
-  
-Trips %>%
+  Trips %>%
   mutate(day = wday(sdate, label = TRUE)) %>%
   #mutate(day = weekdays(Trips$sdate)) %>%
   ggplot(aes(y = day, fill = day)) +
   geom_bar() +
+  labs(title = "Events by day of the Week", 
+       x = "Number of Events", 
+       y = "Day of the Week")
   theme_classic()
 
 # c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", 
@@ -247,13 +256,13 @@ Trips %>%
   ggplot(aes(x = t_day)) +
   geom_density() +
   facet_wrap(vars(day)) +
-  labs(title = "Events during The Week", 
+  labs(title = "Events during the Week", 
        x = "Time of Day", 
        y = "Event density") +
   theme(plot.background = element_rect(fill = "snow1"),
         text = element_text(family = "Times"))
 ```
-There is a pattern of this facetted graph. On weekdays, Mon-Friday, we see the density increases during the two peaks: when workers are traveling to work, and then increasing again when workers are traveling home from work. On weekends, density of events gradually increases during the day and then decreases as night approaches. 
+There is a pattern of this faceted graph. On weekdays, Mon-Friday, we see the density increases during the two peaks: when workers are traveling to work, and then increasing again when workers are traveling home from work. On weekends, density of events gradually increases during the day and then decreases as night approaches. 
 
 The variable `client` describes whether the renter is a regular user (level `Registered`) or has not joined the bike-rental organization (`Causal`). The next set of exercises investigate whether these two different categories of users show different rental behavior and how `client` interacts with the patterns you found in the previous exercises. 
 
@@ -332,7 +341,7 @@ Trips %>%
   theme(plot.background = element_rect(fill = "snow1"),
         text = element_text(family = "Times"))
 ```
-The first graph shows the usage of casual vs registered riders on weekdays and weekends, while the second shows the usage of on weekdays vs weekends by casual and registered riders. The graphs are similar, but the first is more a comparison of client type by week day, while the second is more a comparison of how each client type rides on the days of the week. As both graphs are very similar, I think they are equally useful for slightly different comparisons/questions.
+The first graph shows the bike usage by both casual and registered riders on weekdays vs weekends. It focuses on the comparison between casual and registered riders based on what day it is. The second graph shows the bike usage on weekdays vs weekends by both casual and registered riders. It focuses on the comparison between weekdays vs weekends by day of the week. As both graphs are very similar, I think they are equally useful for slightly different comparisons/questions.
 
 ### Spatial patterns
 
@@ -351,14 +360,6 @@ Trips %>%
     theme(plot.background = element_rect(fill = "snow1"),
         text = element_text(family = "Times"))
  
-  
-# Trips %>%
-#   left_join(Stations, 
-#             by = c("sstation" = "name")) %>%
-#   group_by(lat, long) %>%
-#   ggplot(aes(x = lat, y = long)) +  
-#   geom_point()
-#   
 ```
   
   16. Only 14.4% of the trips in our data are carried out by casual users. Create a plot that shows which area(s) have stations with a much higher percentage of departures by casual users. What patterns do you notice? (Again, we'll improve this next week when we learn about maps).
@@ -369,7 +370,7 @@ Trips %>%
             by = c("sstation" = "name")) %>%
   group_by(lat, long) %>%
   ggplot(aes(x = long, y = lat, color = client)) + 
-  geom_count(shape= 5) +
+  geom_count(shape = 1) +
   labs(title = "Total Number of Departures by Station Location", 
        x = "Latitude", 
        y =  "Longitude") +
@@ -408,7 +409,7 @@ breed_traits_total %>%
              y = fct_reorder(Breed, total_rating))) +
   geom_point() +
   labs(title = "Total Rating of Dog Breeds", 
-       y = "Breed", 
+       y = "Dog Breed", 
        x = "Total Rating") +
   theme_clean() +
   theme(plot.background = element_rect(fill = "snow1"),
@@ -455,7 +456,7 @@ breed_rank_all %>%
   geom_line() +
   labs(title = "Rankings of Dog Breeds by Year", 
        x = "Year", 
-       y = "Breeds") +
+       y = "Dog Breeds") +
   theme(plot.background = element_rect(fill = "snow1"),
         text = element_text(family = "Times"))
 ```
@@ -465,7 +466,6 @@ One thing that would make this graph better would be if Miniature American Sheph
   
 ```{r}
 
-# add str function and fct function
 top_10 <- breed_rank_all %>% 
   slice(1:10) %>%
   select(Breed, `2016 Rank`:`2020 Rank`) 
@@ -493,19 +493,15 @@ new_top_10 %>%
        x = "Year", 
        y = "Ranking", 
        color = "Breeds")
-#I reordered the breeds in the color legend but its in the reverse order. 
-
-# new_top_10 %>%
-#   ggplot(aes(x = year, y = desc(rank), color = fct_reorder2(Breed, year, rank))) +
-#   geom_line() +
-#   geom_point() +
-#   #scale_y_reverse(breaks = seq(1, max(new_top_10$rank), 1)) +
+#I reordered the breeds in the color legend using fct reorder2, but then reversed the scale to put the 1 ranking at the top, but it doesn't change the order of the legend colors, causing them to still be in reverse order. 
 
 ```
   
 ## GitHub link
 
   20. Below, provide a link to your GitHub page with this set of Weekly Exercises. Specifically, if the name of the file is 03_exercises.Rmd, provide a link to the 03_exercises.md file, which is the one that will be most readable on GitHub.
+
+[Link to Exercise 3](https://github.com/aleidner6/AnnaLeidner_test_repo/blob/main/03_exercises.md).
 
 ## Challenge problem! 
 
