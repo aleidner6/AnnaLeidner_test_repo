@@ -130,7 +130,7 @@ garden_harvest %>%
   group_by(variety) %>%
   slice(1) %>%
   mutate(weight_lb = weight * 0.00220462) %>%
-  ggplot(aes(x = weight_lb, y = fct_reorder(variety, weight_lb), fill = variety)) +
+  ggplot(aes(x = weight_lb, y = fct_reorder(variety, date), fill = variety)) +
     geom_col() +
   labs(title = "Tomato Varieties first harvest weight", 
        y = "Tomato Variety", 
