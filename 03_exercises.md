@@ -60,8 +60,6 @@ Before starting your assignment, you need to get yourself set up on GitHub and m
 * As you work through your homework, save and commit often, push changes occasionally (maybe after you feel finished with an exercise?), and go check to see what the .md file looks like on GitHub.  
 * If you have issues, let me know! This is new to many of you and may not be intuitive at first. But, I promise, you'll get the hang of it! 
 
-
-
 ## Instructions
 
 * Put your name at the top of the document. 
@@ -85,7 +83,7 @@ These exercises will reiterate what you learned in the "Expanding the data wrang
 ```r
 garden_harvest %>% 
   mutate(day = wday(date, label = TRUE)) %>%
-  group_by(vegetable, day) %>%
+  group_by(vegetable, day) %>% #"for each" = group by
   mutate(wt_lbs = weight * 0.00220462) %>%
   summarize(total_weight = sum(wt_lbs)) %>%
   pivot_wider(names_from = day,
@@ -108,23 +106,42 @@ garden_harvest %>%
   mutate(wt_lbs = weight * 0.00220462) %>%
   summarize(total_wt = sum(wt_lbs)) %>%
   left_join(garden_planting, 
-            by = c("vegetable", "variety")) %>%
-  arrange(plot)
+            by = c("vegetable", "variety")) 
 ```
 
 <div data-pagedtable="false">
   <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["vegetable"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variety"],"name":[2],"type":["chr"],"align":["left"]},{"label":["total_wt"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["plot"],"name":[4],"type":["chr"],"align":["left"]},{"label":["number_seeds_planted"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["date"],"name":[6],"type":["date"],"align":["right"]},{"label":["number_seeds_exact"],"name":[7],"type":["lgl"],"align":["right"]},{"label":["notes"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"corn","2":"Dorinny Sweet","3":"11.40670388","4":"A","5":"20","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"peas","2":"Super Sugar Snap","3":"9.56805080","4":"A","5":"22","6":"2020-04-19","7":"TRUE","8":"NA"},{"1":"squash","2":"Blue (saved)","3":"41.52401770","4":"A","5":"4","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"Red Kuri","3":"22.73183682","4":"A","5":"4","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"Waltham Butternut","3":"24.27066158","4":"A","5":"4","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"corn","2":"Golden Bantam","3":"1.60275874","4":"B","5":"20","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"peas","2":"Magnolia Blossom","3":"7.45822946","4":"B","5":"24","6":"2020-04-19","7":"TRUE","8":"NA"},{"1":"pumpkins","2":"Cinderella's Carraige","3":"32.87308882","4":"B","5":"3","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"pumpkins","2":"saved","3":"76.93241952","4":"B","5":"8","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"Blue (saved)","3":"41.52401770","4":"B","5":"8","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"Red Kuri","3":"22.73183682","4":"B","5":"4","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"lettuce","2":"Farmer's Market Blend","3":"3.80296950","4":"C","5":"60","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"radish","2":"Garden Party Mix","3":"0.94578198","4":"C","5":"20","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"beans","2":"Bush Bush Slender","3":"22.12997556","4":"D","5":"10","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"broccoli","2":"Main Crop Bravado","3":"2.13186754","4":"D","5":"7","6":"2020-05-22","7":"TRUE","8":"NA"},{"1":"potatoes","2":"purple","3":"3.00930630","4":"D","5":"5","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"potatoes","2":"Russet","3":"9.09185288","4":"D","5":"8","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"zucchini","2":"Romanesco","3":"99.70834874","4":"D","5":"3","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"beans","2":"Classic Slenderette","3":"3.60455370","4":"E","5":"29","6":"2020-06-20","7":"TRUE","8":"NA"},{"1":"cilantro","2":"cilantro","3":"0.11464024","4":"E","5":"20","6":"2020-06-20","7":"FALSE","8":"NA"},{"1":"spinach","2":"Catalina","3":"2.03486426","4":"E","5":"100","6":"2020-06-20","7":"FALSE","8":"NA"},{"1":"kale","2":"Heirloom Lacinto","3":"5.94586014","4":"front","5":"30","6":"2020-06-20","7":"FALSE","8":"NA"},{"1":"kohlrabi","2":"Crispy Colors Duo","3":"0.42108242","4":"front","5":"10","6":"2020-05-20","7":"FALSE","8":"NA"},{"1":"tomatoes","2":"volunteers","3":"51.61235882","4":"front","5":"5","6":"2020-06-03","7":"TRUE","8":"NA"},{"1":"lettuce","2":"Lettuce Mixture","3":"4.74875148","4":"G","5":"200","6":"2020-06-20","7":"FALSE","8":"NA"},{"1":"radish","2":"Garden Party Mix","3":"0.94578198","4":"G","5":"30","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"beets","2":"Gourmet Golden","3":"7.02171470","4":"H","5":"40","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"beets","2":"Sweet Merlin","3":"6.38678414","4":"H","5":"40","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"carrots","2":"Bolero","3":"8.29157582","4":"H","5":"50","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"carrots","2":"Dragon","3":"4.10500244","4":"H","5":"40","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"carrots","2":"King Midas","3":"4.09618396","4":"H","5":"50","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"onions","2":"Long Keeping Rainbow","3":"3.31133924","4":"H","5":"40","6":"2020-04-26","7":"FALSE","8":"NA"},{"1":"radish","2":"Garden Party Mix","3":"0.94578198","4":"H","5":"15","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"spinach","2":"Catalina","3":"2.03486426","4":"H","5":"50","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"broccoli","2":"Main Crop Bravado","3":"2.13186754","4":"I","5":"7","6":"2020-05-22","7":"TRUE","8":"NA"},{"1":"potatoes","2":"red","3":"4.43349082","4":"I","5":"3","6":"2020-05-22","7":"FALSE","8":"NA"},{"1":"potatoes","2":"yellow","3":"7.40090934","4":"I","5":"10","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"potatoes","2":"yellow","3":"7.40090934","4":"I","5":"8","6":"2020-05-22","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Amish Paste","3":"65.67342518","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Better Boy","3":"34.00846812","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Bonny Best","3":"24.92322910","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Brandywine","3":"15.64618814","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Cherokee Purple","3":"15.71232674","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Mortgage Lifter","3":"26.32536742","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"died"},{"1":"tomatoes","2":"Old German","3":"26.71778978","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"volunteers","3":"51.61235882","4":"J","5":"1","6":"2020-06-03","7":"TRUE","8":"NA"},{"1":"beans","2":"Chinese Red Noodle","3":"0.78484472","4":"K","5":"5","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"peppers","2":"green","3":"5.69232884","4":"K","5":"12","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"pumpkins","2":"New England Sugar","3":"44.85960776","4":"K","5":"4","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"squash","2":"delicata","3":"10.49840044","4":"K","5":"8","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"squash","2":"Waltham Butternut","3":"24.27066158","4":"K","5":"6","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"beans","2":"Chinese Red Noodle","3":"0.78484472","4":"L","5":"5","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"carrots","2":"Bolero","3":"8.29157582","4":"L","5":"50","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"carrots","2":"Dragon","3":"4.10500244","4":"L","5":"50","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"carrots","2":"King Midas","3":"4.09618396","4":"L","5":"50","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"cucumbers","2":"pickling","3":"43.60958822","4":"L","5":"20","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"jalapeño","2":"giant","3":"9.87228836","4":"L","5":"4","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"lettuce","2":"Farmer's Market Blend","3":"3.80296950","4":"L","5":"60","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"beans","2":"Bush Bush Slender","3":"22.12997556","4":"M","5":"30","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"Swiss chard","2":"Neon Glow","3":"6.88282364","4":"M","5":"25","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"tomatoes","2":"Amish Paste","3":"65.67342518","4":"N","5":"2","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Better Boy","3":"34.00846812","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Big Beef","3":"24.99377694","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Black Krim","3":"15.80712540","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Jet Star","3":"15.02448530","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Mortgage Lifter","3":"26.32536742","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"volunteers","3":"51.61235882","4":"N","5":"1","6":"2020-06-03","7":"TRUE","8":"NA"},{"1":"edamame","2":"edamame","3":"6.09136506","4":"O","5":"25","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"peppers","2":"green","3":"5.69232884","4":"O","5":"5","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"grape","3":"32.39468628","4":"O","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"volunteers","3":"51.61235882","4":"O","5":"2","6":"2020-06-03","7":"TRUE","8":"NA"},{"1":"broccoli","2":"Yod Fah","3":"0.82011864","4":"P","5":"25","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"kale","2":"Heirloom Lacinto","3":"5.94586014","4":"P","5":"30","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"lettuce","2":"Tatsoi","3":"2.89466606","4":"P","5":"25","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"onions","2":"Delicious Duo","3":"0.75398004","4":"P","5":"25","6":"2020-04-26","7":"FALSE","8":"NA"},{"1":"peppers","2":"variety","3":"3.65085072","4":"potA","5":"3","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"peppers","2":"variety","3":"3.65085072","4":"potA","5":"3","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"basil","2":"Isle of Naxos","3":"1.08026380","4":"potB","5":"40","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"hot peppers","2":"thai","3":"0.14770954","4":"potB","5":"1","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"hot peppers","2":"variety","3":"1.32056738","4":"potC","5":"6","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"cilantro","2":"cilantro","3":"0.11464024","4":"potD","5":"15","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"peppers","2":"variety","3":"3.65085072","4":"potD","5":"1","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"squash","2":"Red Kuri","3":"22.73183682","4":"side","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"apple","2":"unknown","3":"0.34392072","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"asparagus","2":"asparagus","3":"0.04409240","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"beets","2":"leaves","3":"0.22266662","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"carrots","2":"greens","3":"0.37258078","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"chives","2":"perrenial","3":"0.01763696","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"lettuce","2":"mustard greens","3":"0.05070626","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"lettuce","2":"reseed","3":"0.09920790","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"raspberries","2":"perrenial","3":"1.85849466","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"rutabaga","2":"Improved Helenor","3":"29.74032380","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"strawberries","2":"perrenial","3":"1.30513504","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["vegetable"],"name":[1],"type":["chr"],"align":["left"]},{"label":["variety"],"name":[2],"type":["chr"],"align":["left"]},{"label":["total_wt"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["plot"],"name":[4],"type":["chr"],"align":["left"]},{"label":["number_seeds_planted"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["date"],"name":[6],"type":["date"],"align":["right"]},{"label":["number_seeds_exact"],"name":[7],"type":["lgl"],"align":["right"]},{"label":["notes"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"apple","2":"unknown","3":"0.34392072","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"asparagus","2":"asparagus","3":"0.04409240","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"basil","2":"Isle of Naxos","3":"1.08026380","4":"potB","5":"40","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"beans","2":"Bush Bush Slender","3":"22.12997556","4":"M","5":"30","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"beans","2":"Bush Bush Slender","3":"22.12997556","4":"D","5":"10","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"beans","2":"Chinese Red Noodle","3":"0.78484472","4":"K","5":"5","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"beans","2":"Chinese Red Noodle","3":"0.78484472","4":"L","5":"5","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"beans","2":"Classic Slenderette","3":"3.60455370","4":"E","5":"29","6":"2020-06-20","7":"TRUE","8":"NA"},{"1":"beets","2":"Gourmet Golden","3":"7.02171470","4":"H","5":"40","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"beets","2":"leaves","3":"0.22266662","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"beets","2":"Sweet Merlin","3":"6.38678414","4":"H","5":"40","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"broccoli","2":"Main Crop Bravado","3":"2.13186754","4":"D","5":"7","6":"2020-05-22","7":"TRUE","8":"NA"},{"1":"broccoli","2":"Main Crop Bravado","3":"2.13186754","4":"I","5":"7","6":"2020-05-22","7":"TRUE","8":"NA"},{"1":"broccoli","2":"Yod Fah","3":"0.82011864","4":"P","5":"25","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"carrots","2":"Bolero","3":"8.29157582","4":"H","5":"50","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"carrots","2":"Bolero","3":"8.29157582","4":"L","5":"50","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"carrots","2":"Dragon","3":"4.10500244","4":"H","5":"40","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"carrots","2":"Dragon","3":"4.10500244","4":"L","5":"50","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"carrots","2":"greens","3":"0.37258078","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"carrots","2":"King Midas","3":"4.09618396","4":"H","5":"50","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"carrots","2":"King Midas","3":"4.09618396","4":"L","5":"50","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"chives","2":"perrenial","3":"0.01763696","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"cilantro","2":"cilantro","3":"0.11464024","4":"potD","5":"15","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"cilantro","2":"cilantro","3":"0.11464024","4":"E","5":"20","6":"2020-06-20","7":"FALSE","8":"NA"},{"1":"corn","2":"Dorinny Sweet","3":"11.40670388","4":"A","5":"20","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"corn","2":"Golden Bantam","3":"1.60275874","4":"B","5":"20","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"cucumbers","2":"pickling","3":"43.60958822","4":"L","5":"20","6":"2020-05-25","7":"FALSE","8":"NA"},{"1":"edamame","2":"edamame","3":"6.09136506","4":"O","5":"25","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"hot peppers","2":"thai","3":"0.14770954","4":"potB","5":"1","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"hot peppers","2":"variety","3":"1.32056738","4":"potC","5":"6","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"jalapeño","2":"giant","3":"9.87228836","4":"L","5":"4","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"kale","2":"Heirloom Lacinto","3":"5.94586014","4":"P","5":"30","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"kale","2":"Heirloom Lacinto","3":"5.94586014","4":"front","5":"30","6":"2020-06-20","7":"FALSE","8":"NA"},{"1":"kohlrabi","2":"Crispy Colors Duo","3":"0.42108242","4":"front","5":"10","6":"2020-05-20","7":"FALSE","8":"NA"},{"1":"lettuce","2":"Farmer's Market Blend","3":"3.80296950","4":"C","5":"60","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"lettuce","2":"Farmer's Market Blend","3":"3.80296950","4":"L","5":"60","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"lettuce","2":"Lettuce Mixture","3":"4.74875148","4":"G","5":"200","6":"2020-06-20","7":"FALSE","8":"NA"},{"1":"lettuce","2":"mustard greens","3":"0.05070626","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"lettuce","2":"reseed","3":"0.09920790","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"lettuce","2":"Tatsoi","3":"2.89466606","4":"P","5":"25","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"onions","2":"Delicious Duo","3":"0.75398004","4":"P","5":"25","6":"2020-04-26","7":"FALSE","8":"NA"},{"1":"onions","2":"Long Keeping Rainbow","3":"3.31133924","4":"H","5":"40","6":"2020-04-26","7":"FALSE","8":"NA"},{"1":"peas","2":"Magnolia Blossom","3":"7.45822946","4":"B","5":"24","6":"2020-04-19","7":"TRUE","8":"NA"},{"1":"peas","2":"Super Sugar Snap","3":"9.56805080","4":"A","5":"22","6":"2020-04-19","7":"TRUE","8":"NA"},{"1":"peppers","2":"green","3":"5.69232884","4":"K","5":"12","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"peppers","2":"green","3":"5.69232884","4":"O","5":"5","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"peppers","2":"variety","3":"3.65085072","4":"potA","5":"3","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"peppers","2":"variety","3":"3.65085072","4":"potA","5":"3","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"peppers","2":"variety","3":"3.65085072","4":"potD","5":"1","6":"2020-05-21","7":"TRUE","8":"NA"},{"1":"potatoes","2":"purple","3":"3.00930630","4":"D","5":"5","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"potatoes","2":"red","3":"4.43349082","4":"I","5":"3","6":"2020-05-22","7":"FALSE","8":"NA"},{"1":"potatoes","2":"Russet","3":"9.09185288","4":"D","5":"8","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"potatoes","2":"yellow","3":"7.40090934","4":"I","5":"10","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"potatoes","2":"yellow","3":"7.40090934","4":"I","5":"8","6":"2020-05-22","7":"TRUE","8":"NA"},{"1":"pumpkins","2":"Cinderella's Carraige","3":"32.87308882","4":"B","5":"3","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"pumpkins","2":"New England Sugar","3":"44.85960776","4":"K","5":"4","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"pumpkins","2":"saved","3":"76.93241952","4":"B","5":"8","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"radish","2":"Garden Party Mix","3":"0.94578198","4":"C","5":"20","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"radish","2":"Garden Party Mix","3":"0.94578198","4":"G","5":"30","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"radish","2":"Garden Party Mix","3":"0.94578198","4":"H","5":"15","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"raspberries","2":"perrenial","3":"1.85849466","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"rutabaga","2":"Improved Helenor","3":"29.74032380","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"spinach","2":"Catalina","3":"2.03486426","4":"H","5":"50","6":"2020-05-16","7":"FALSE","8":"NA"},{"1":"spinach","2":"Catalina","3":"2.03486426","4":"E","5":"100","6":"2020-06-20","7":"FALSE","8":"NA"},{"1":"squash","2":"Blue (saved)","3":"41.52401770","4":"A","5":"4","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"Blue (saved)","3":"41.52401770","4":"B","5":"8","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"delicata","3":"10.49840044","4":"K","5":"8","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"squash","2":"Red Kuri","3":"22.73183682","4":"A","5":"4","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"Red Kuri","3":"22.73183682","4":"B","5":"4","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"Red Kuri","3":"22.73183682","4":"side","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"Waltham Butternut","3":"24.27066158","4":"A","5":"4","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"squash","2":"Waltham Butternut","3":"24.27066158","4":"K","5":"6","6":"2020-05-25","7":"TRUE","8":"NA"},{"1":"strawberries","2":"perrenial","3":"1.30513504","4":"NA","5":"NA","6":"<NA>","7":"NA","8":"NA"},{"1":"Swiss chard","2":"Neon Glow","3":"6.88282364","4":"M","5":"25","6":"2020-05-02","7":"FALSE","8":"NA"},{"1":"tomatoes","2":"Amish Paste","3":"65.67342518","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Amish Paste","3":"65.67342518","4":"N","5":"2","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Better Boy","3":"34.00846812","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Better Boy","3":"34.00846812","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Big Beef","3":"24.99377694","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Black Krim","3":"15.80712540","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Bonny Best","3":"24.92322910","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Brandywine","3":"15.64618814","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Cherokee Purple","3":"15.71232674","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"grape","3":"32.39468628","4":"O","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Jet Star","3":"15.02448530","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Mortgage Lifter","3":"26.32536742","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"died"},{"1":"tomatoes","2":"Mortgage Lifter","3":"26.32536742","4":"N","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"Old German","3":"26.71778978","4":"J","5":"1","6":"2020-05-20","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"volunteers","3":"51.61235882","4":"N","5":"1","6":"2020-06-03","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"volunteers","3":"51.61235882","4":"J","5":"1","6":"2020-06-03","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"volunteers","3":"51.61235882","4":"front","5":"5","6":"2020-06-03","7":"TRUE","8":"NA"},{"1":"tomatoes","2":"volunteers","3":"51.61235882","4":"O","5":"2","6":"2020-06-03","7":"TRUE","8":"NA"},{"1":"zucchini","2":"Romanesco","3":"99.70834874","4":"D","5":"3","6":"2020-05-21","7":"TRUE","8":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 When planting, the same variety of some vegetables were planted in multiple different planter boxes so the “plot” data doesn’t match up perfectly. Instead, there could be a separate row for each vegetable and variety by where it was plotted. 
 
   3. I would like to understand how much money I "saved" by gardening, for each vegetable type. Describe how I could use the `garden_harvest` and `garden_spending` datasets, along with data from somewhere like [this](https://products.wholefoodsmarket.com/search?sort=relevance&store=10542) to answer this question. You can answer this in words, referencing various join functions. You don't need R code but could provide some if it's helpful.
+  
+You could use the `garden_spending data` to find the total amount spent to grow/harvest each vegetable. Then, using `garden_harvest` you could find the total weight in grams for each vegetable. You could then combine those datasets using left_join. Using data found at a produce price site, you could then find how much each vegetable type costs per unit or pound. Somewhere along the way, the units would likely all have to be converted to grams or kg or lbs. Then, combining the newfound data with the new dataset we created, you could multiply the total weight of the vegetable type harvested by the price per unit. Finally, you would have to subtract how much you spent planting and harvesting that vegetable to find how much money was saved for each vegetable type.
 
-Use garden_harvest and garden_spending. Use the price_with_tax and the count of vegetable by variety. Multiply the price_with_tax by the number of vegetables by variety and that should find how much money was saved.
 
+```r
+garden_spending_tot <- garden_spending %>%
+  group_by(vegetable) %>%
+  mutate(total_spending = sum(price_with_tax)) %>%
+  select(vegetable, total_spending) %>%
+  slice(1)
 
+garden_harvest %>%
+  group_by(vegetable) %>%
+  mutate(total_weight_g = sum(weight)) %>%
+  select(vegetable, total_weight_g ) %>%
+  slice(1) %>%
+  left_join(garden_spending_tot, 
+            by = c("vegetable"))
+```
 
+<div data-pagedtable="false">
+  <script data-pagedtable-source type="application/json">
+{"columns":[{"label":["vegetable"],"name":[1],"type":["chr"],"align":["left"]},{"label":["total_weight_g"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["total_spending"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"apple","2":"156","3":"NA"},{"1":"asparagus","2":"20","3":"NA"},{"1":"basil","2":"490","3":"3.505938"},{"1":"beans","2":"12029","3":"9.471425"},{"1":"beets","2":"6183","3":"6.666675"},{"1":"broccoli","2":"1339","3":"6.677463"},{"1":"carrots","2":"7650","3":"9.741113"},{"1":"chives","2":"8","3":"NA"},{"1":"cilantro","2":"52","3":"3.505938"},{"1":"corn","2":"5901","3":"7.281563"},{"1":"cucumbers","2":"19781","3":"3.009713"},{"1":"edamame","2":"2763","3":"3.441213"},{"1":"hot peppers","2":"666","3":"0.000000"},{"1":"jalapeño","2":"4478","3":"5.000000"},{"1":"kale","2":"2697","3":"3.009713"},{"1":"kohlrabi","2":"191","3":"3.549088"},{"1":"lettuce","2":"5260","3":"10.021588"},{"1":"onions","2":"1844","3":"6.774550"},{"1":"peas","2":"7723","3":"6.235175"},{"1":"peppers","2":"4238","3":"1.666667"},{"1":"potatoes","2":"10857","3":"0.000000"},{"1":"pumpkins","2":"70155","3":"9.158588"},{"1":"radish","2":"429","3":"3.225463"},{"1":"raspberries","2":"843","3":"NA"},{"1":"rutabaga","2":"13490","3":"3.225463"},{"1":"spinach","2":"923","3":"3.225463"},{"1":"squash","2":"44917","3":"7.281563"},{"1":"strawberries","2":"592","3":"NA"},{"1":"Swiss chard","2":"3122","3":"NA"},{"1":"tomatoes","2":"158231","3":"23.333488"},{"1":"zucchini","2":"45227","3":"3.225463"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
   4. Subset the data to tomatoes. Reorder the tomato varieties from smallest to largest first harvest date. Create a barplot of total harvest in pounds for each variety, in the new order.CHALLENGE: add the date near the end of the bar. (This is probably not a super useful graph because it's difficult to read. This is more an exercise in using some of the functions you just learned.)
 
 
@@ -226,7 +243,7 @@ Trips %>%
   ggplot(aes(x = sdate)) +
   geom_density() +
   labs(title = "Density of Bike Rentals Between October and January", 
-       x = "Date", 
+       x = "Month", 
        y = "Density of Bike Rentals") +
   theme(plot.background = element_rect(fill = "snow1"),
         text = element_text(family = "Times")) 
@@ -244,7 +261,7 @@ Trips %>%
   ggplot(aes(x = t_day)) +
   geom_density() +
   labs(title = "Density of Bike Rentals Throughout 24 Hours", 
-       x = "Time of Day", 
+       x = "Time of Day (hr)", 
        y = "Density of Bike Rentals") +
   theme(plot.background = element_rect(fill = "snow1"),
         text = element_text(family = "Times")) 
@@ -256,15 +273,435 @@ Trips %>%
   
 
 ```r
-Trips %>%
+  Trips %>%
   mutate(day = wday(sdate, label = TRUE)) %>%
   #mutate(day = weekdays(Trips$sdate)) %>%
   ggplot(aes(y = day, fill = day)) +
   geom_bar() +
-  theme_classic()
+  labs(title = "Events by day of the Week", 
+       x = "Number of Events", 
+       y = "Day of the Week")
 ```
 
 ![](03_exercises_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+
+```r
+  theme_classic()
+```
+
+```
+## List of 93
+##  $ line                      :List of 6
+##   ..$ colour       : chr "black"
+##   ..$ size         : num 0.5
+##   ..$ linetype     : num 1
+##   ..$ lineend      : chr "butt"
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_line" "element"
+##  $ rect                      :List of 5
+##   ..$ fill         : chr "white"
+##   ..$ colour       : chr "black"
+##   ..$ size         : num 0.5
+##   ..$ linetype     : num 1
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ text                      :List of 11
+##   ..$ family       : chr ""
+##   ..$ face         : chr "plain"
+##   ..$ colour       : chr "black"
+##   ..$ size         : num 11
+##   ..$ hjust        : num 0.5
+##   ..$ vjust        : num 0.5
+##   ..$ angle        : num 0
+##   ..$ lineheight   : num 0.9
+##   ..$ margin       : 'margin' num [1:4] 0points 0points 0points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ title                     : NULL
+##  $ aspect.ratio              : NULL
+##  $ axis.title                : NULL
+##  $ axis.title.x              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 2.75points 0points 0points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.title.x.top          :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 0points 2.75points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.title.x.bottom       : NULL
+##  $ axis.title.y              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : num 90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 2.75points 0points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.title.y.left         : NULL
+##  $ axis.title.y.right        :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : num -90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 0points 0points 2.75points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.text                 :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : chr "grey30"
+##   ..$ size         : 'rel' num 0.8
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.text.x               :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 2.2points 0points 0points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.text.x.top           :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : num 0
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 0points 2.2points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.text.x.bottom        : NULL
+##  $ axis.text.y               :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 1
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 2.2points 0points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.text.y.left          : NULL
+##  $ axis.text.y.right         :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 0points 0points 2.2points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ axis.ticks                :List of 6
+##   ..$ colour       : chr "grey20"
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_line" "element"
+##  $ axis.ticks.x              : NULL
+##  $ axis.ticks.x.top          : NULL
+##  $ axis.ticks.x.bottom       : NULL
+##  $ axis.ticks.y              : NULL
+##  $ axis.ticks.y.left         : NULL
+##  $ axis.ticks.y.right        : NULL
+##  $ axis.ticks.length         : 'simpleUnit' num 2.75points
+##   ..- attr(*, "unit")= int 8
+##  $ axis.ticks.length.x       : NULL
+##  $ axis.ticks.length.x.top   : NULL
+##  $ axis.ticks.length.x.bottom: NULL
+##  $ axis.ticks.length.y       : NULL
+##  $ axis.ticks.length.y.left  : NULL
+##  $ axis.ticks.length.y.right : NULL
+##  $ axis.line                 :List of 6
+##   ..$ colour       : chr "black"
+##   ..$ size         : 'rel' num 1
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_line" "element"
+##  $ axis.line.x               : NULL
+##  $ axis.line.x.top           : NULL
+##  $ axis.line.x.bottom        : NULL
+##  $ axis.line.y               : NULL
+##  $ axis.line.y.left          : NULL
+##  $ axis.line.y.right         : NULL
+##  $ legend.background         :List of 5
+##   ..$ fill         : NULL
+##   ..$ colour       : logi NA
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ legend.margin             : 'margin' num [1:4] 5.5points 5.5points 5.5points 5.5points
+##   ..- attr(*, "unit")= int 8
+##  $ legend.spacing            : 'simpleUnit' num 11points
+##   ..- attr(*, "unit")= int 8
+##  $ legend.spacing.x          : NULL
+##  $ legend.spacing.y          : NULL
+##  $ legend.key                : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  $ legend.key.size           : 'simpleUnit' num 1.2lines
+##   ..- attr(*, "unit")= int 3
+##  $ legend.key.height         : NULL
+##  $ legend.key.width          : NULL
+##  $ legend.text               :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 0.8
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ legend.text.align         : NULL
+##  $ legend.title              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ legend.title.align        : NULL
+##  $ legend.position           : chr "right"
+##  $ legend.direction          : NULL
+##  $ legend.justification      : chr "center"
+##  $ legend.box                : NULL
+##  $ legend.box.just           : NULL
+##  $ legend.box.margin         : 'margin' num [1:4] 0cm 0cm 0cm 0cm
+##   ..- attr(*, "unit")= int 1
+##  $ legend.box.background     : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  $ legend.box.spacing        : 'simpleUnit' num 11points
+##   ..- attr(*, "unit")= int 8
+##  $ panel.background          :List of 5
+##   ..$ fill         : chr "white"
+##   ..$ colour       : logi NA
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ panel.border              : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  $ panel.spacing             : 'simpleUnit' num 5.5points
+##   ..- attr(*, "unit")= int 8
+##  $ panel.spacing.x           : NULL
+##  $ panel.spacing.y           : NULL
+##  $ panel.grid                :List of 6
+##   ..$ colour       : chr "grey92"
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ lineend      : NULL
+##   ..$ arrow        : logi FALSE
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_line" "element"
+##  $ panel.grid.major          : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  $ panel.grid.minor          : list()
+##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
+##  $ panel.grid.major.x        : NULL
+##  $ panel.grid.major.y        : NULL
+##  $ panel.grid.minor.x        : NULL
+##  $ panel.grid.minor.y        : NULL
+##  $ panel.ontop               : logi FALSE
+##  $ plot.background           :List of 5
+##   ..$ fill         : NULL
+##   ..$ colour       : chr "white"
+##   ..$ size         : NULL
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ plot.title                :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 1.2
+##   ..$ hjust        : num 0
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 0points 5.5points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ plot.title.position       : chr "panel"
+##  $ plot.subtitle             :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 0
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 0points 0points 5.5points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ plot.caption              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 0.8
+##   ..$ hjust        : num 1
+##   ..$ vjust        : num 1
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 5.5points 0points 0points 0points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ plot.caption.position     : chr "panel"
+##  $ plot.tag                  :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 1.2
+##   ..$ hjust        : num 0.5
+##   ..$ vjust        : num 0.5
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ plot.tag.position         : chr "topleft"
+##  $ plot.margin               : 'margin' num [1:4] 5.5points 5.5points 5.5points 5.5points
+##   ..- attr(*, "unit")= int 8
+##  $ strip.background          :List of 5
+##   ..$ fill         : chr "white"
+##   ..$ colour       : chr "black"
+##   ..$ size         : 'rel' num 2
+##   ..$ linetype     : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_rect" "element"
+##  $ strip.background.x        : NULL
+##  $ strip.background.y        : NULL
+##  $ strip.placement           : chr "inside"
+##  $ strip.text                :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : chr "grey10"
+##   ..$ size         : 'rel' num 0.8
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : 'margin' num [1:4] 4.4points 4.4points 4.4points 4.4points
+##   .. ..- attr(*, "unit")= int 8
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ strip.text.x              : NULL
+##  $ strip.text.y              :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : num -90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  $ strip.switch.pad.grid     : 'simpleUnit' num 2.75points
+##   ..- attr(*, "unit")= int 8
+##  $ strip.switch.pad.wrap     : 'simpleUnit' num 2.75points
+##   ..- attr(*, "unit")= int 8
+##  $ strip.text.y.left         :List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : NULL
+##   ..$ vjust        : NULL
+##   ..$ angle        : num 90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi TRUE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  - attr(*, "class")= chr [1:2] "theme" "gg"
+##  - attr(*, "complete")= logi TRUE
+##  - attr(*, "validate")= logi TRUE
+```
 
 ```r
 # c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", 
@@ -283,7 +720,7 @@ Trips %>%
   ggplot(aes(x = t_day)) +
   geom_density() +
   facet_wrap(vars(day)) +
-  labs(title = "Events during The Week", 
+  labs(title = "Events during the Week", 
        x = "Time of Day", 
        y = "Event density") +
   theme(plot.background = element_rect(fill = "snow1"),
@@ -291,7 +728,7 @@ Trips %>%
 ```
 
 ![](03_exercises_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
-There is a pattern of this facetted graph. On weekdays, Mon-Friday, we see the density increases during the two peaks: when workers are traveling to work, and then increasing again when workers are traveling home from work. On weekends, density of events gradually increases during the day and then decreases as night approaches. 
+There is a pattern of this faceted graph. On weekdays, Mon-Friday, we see the density increases during the two peaks: when workers are traveling to work, and then increasing again when workers are traveling home from work. On weekends, density of events gradually increases during the day and then decreases as night approaches. 
 
 The variable `client` describes whether the renter is a regular user (level `Registered`) or has not joined the bike-rental organization (`Causal`). The next set of exercises investigate whether these two different categories of users show different rental behavior and how `client` interacts with the patterns you found in the previous exercises. 
 
@@ -382,7 +819,7 @@ Trips %>%
 ```
 
 ![](03_exercises_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
-The first graph shows the usage of casual vs registered riders on weekdays and weekends, while the second shows the usage of on weekdays vs weekends by casual and registered riders. The graphs are similar, but the first is more a comparison of client type by week day, while the second is more a comparison of how each client type rides on the days of the week. As both graphs are very similar, I think they are equally useful for slightly different comparisons/questions.
+The first graph shows the bike usage by both casual and registered riders on weekdays vs weekends. It focuses on the comparison between casual and registered riders based on what day it is. The second graph shows the bike usage on weekdays vs weekends by both casual and registered riders. It focuses on the comparison between weekdays vs weekends by day of the week. As both graphs are very similar, I think they are equally useful for slightly different comparisons/questions.
 
 ### Spatial patterns
 
@@ -404,16 +841,6 @@ Trips %>%
 ```
 
 ![](03_exercises_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
-
-```r
-# Trips %>%
-#   left_join(Stations, 
-#             by = c("sstation" = "name")) %>%
-#   group_by(lat, long) %>%
-#   ggplot(aes(x = lat, y = long)) +  
-#   geom_point()
-#   
-```
   
   16. Only 14.4% of the trips in our data are carried out by casual users. Create a plot that shows which area(s) have stations with a much higher percentage of departures by casual users. What patterns do you notice? (Again, we'll improve this next week when we learn about maps).
   
@@ -424,7 +851,7 @@ Trips %>%
             by = c("sstation" = "name")) %>%
   group_by(lat, long) %>%
   ggplot(aes(x = long, y = lat, color = client)) + 
-  geom_count(shape= 5) +
+  geom_count(shape = 1) +
   labs(title = "Total Number of Departures by Station Location", 
        x = "Latitude", 
        y =  "Longitude") +
@@ -466,7 +893,7 @@ breed_traits_total %>%
              y = fct_reorder(Breed, total_rating))) +
   geom_point() +
   labs(title = "Total Rating of Dog Breeds", 
-       y = "Breed", 
+       y = "Dog Breed", 
        x = "Total Rating") +
   theme_clean() +
   theme(plot.background = element_rect(fill = "snow1"),
@@ -523,7 +950,7 @@ breed_rank_all %>%
   geom_line() +
   labs(title = "Rankings of Dog Breeds by Year", 
        x = "Year", 
-       y = "Breeds") +
+       y = "Dog Breeds") +
   theme(plot.background = element_rect(fill = "snow1"),
         text = element_text(family = "Times"))
 ```
@@ -535,7 +962,6 @@ One thing that would make this graph better would be if Miniature American Sheph
   
 
 ```r
-# add str function and fct function
 top_10 <- breed_rank_all %>% 
   slice(1:10) %>%
   select(Breed, `2016 Rank`:`2020 Rank`) 
@@ -544,11 +970,11 @@ new_top_10 <- top_10 %>%
   pivot_longer(ends_with("Rank"), #using pivot_longer to make dataset longer. Reduces columns (turns years into individual row values). Years as variables/columns turns into values of year variable. 
                names_to = "year", 
                values_to = "rank") %>% 
-  mutate(year = str_remove(year, " Rank") %>% #Str function removes Rank from year values. 
-  as.numeric()) %>% #turns string for year into numeric data. 
+  mutate(year = str_remove(year, " Rank")) %>% #Str function removes Rank from year values. 
+  mutate(year = as.numeric(year)) %>% #turns string for year into numeric data. 
   group_by(Breed) 
 
-new_top_10 
+new_top_10
 ```
 
 <div data-pagedtable="false">
@@ -558,15 +984,13 @@ new_top_10
 </div>
 
 ```r
-new_top_10 %>%
-  ggplot(aes(x = year, y = rank, color = fct_reorder2(Breed, year, rank))) +
-  geom_line() +
-  geom_point() +
+ggplot(new_top_10, aes(x = year, y = rank, group = Breed)) +
+  geom_line(aes(color = fct_reorder2(Breed, year, rank), alpha = 1), size = 2) +
+  geom_point(aes(color = fct_reorder2(Breed, year, rank), alpha = 1), size = 4) +
   #scale_y_continuous(breaks = 1:nrow(new_top_10)) +
   scale_y_reverse(breaks = 1:nrow(new_top_10)) + #above reverses order on graph, but still in wrong order on legend...
-  #scale_fill_continuous(trans = 'reverse') +
-  #scale_fill_brewer(guide = guide_legend(reverse = TRUE)) +
-  #guides(color = guide_colorbar(reverse = TRUE)) +
+  geom_label(data = new_top_10 %>% filter(year == "2020"), aes(label = Breed, x = 2019.5), size = 2, hjust = 0.5, fontface = "bold") +
+  theme(legend.position = "none") +
   labs(title = "Current Top 10 Dog Breeds Since 2016", 
        x = "Year", 
        y = "Ranking", 
@@ -576,15 +1000,43 @@ new_top_10 %>%
 ![](03_exercises_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
 
 ```r
-#I reordered the breeds in the color legend but its in the reverse order. 
+#Would've liked the labels to be on the right, but when I tried that they were cut off. 
+```
 
+```r
+# #Draft
+# top_10 <- breed_rank_all %>% 
+#   slice(1:10) %>%
+#   select(Breed, `2016 Rank`:`2020 Rank`) 
+#   
+# new_top_10 <- top_10 %>% 
+#   pivot_longer(ends_with("Rank"), #using pivot_longer to make dataset longer. Reduces columns (turns years into individual row values). Years as variables/columns turns into values of year variable. 
+#                names_to = "year", 
+#                values_to = "rank") %>% 
+#   mutate(year = str_remove(year, " Rank") %>% #Str function removes Rank from year values. 
+#   as.numeric()) %>% #turns string for year into numeric data. 
+#   group_by(Breed) %>%
+#   arrange(rank)
+# 
+# new_top_10 
+# 
+# 
 # new_top_10 %>%
-#   ggplot(aes(x = year, y = desc(rank), color = fct_reorder2(Breed, year, rank))) +
+#   ggplot(aes(x = year, y = rank, color = fct_reorder2(Breed, year, rank))) +
 #   geom_line() +
 #   geom_point() +
-#   #scale_y_reverse(breaks = seq(1, max(new_top_10$rank), 1)) +
+#   #scale_y_continuous(breaks = 1:nrow(new_top_10)) +
+#   scale_y_reverse(breaks = 1:nrow(new_top_10)) + #above reverses order on graph, but still in wrong order on legend...
+#   #scale_fill_continuous(trans = 'reverse') +
+#   #scale_fill_brewer(guide = guide_legend(reverse = TRUE)) +
+#   #guides(color = guide_colorbar(reverse = TRUE)) +
+#   labs(title = "Current Top 10 Dog Breeds Since 2016", 
+#        x = "Year", 
+#        y = "Ranking", 
+#        color = "Breeds")
+# #I reordered the breeds in the color legend using fct reorder2, but then reversed the scale to put the 1 ranking at the top, but it doesn't change the order of the legend colors, causing them to still be in reverse order.
 ```
-  
+
 ## GitHub link
 
   20. Below, provide a link to your GitHub page with this set of Weekly Exercises. Specifically, if the name of the file is 03_exercises.Rmd, provide a link to the 03_exercises.md file, which is the one that will be most readable on GitHub.

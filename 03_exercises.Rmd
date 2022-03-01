@@ -82,7 +82,7 @@ These exercises will reiterate what you learned in the "Expanding the data wrang
 ```{r}
 garden_harvest %>% 
   mutate(day = wday(date, label = TRUE)) %>%
-  group_by(vegetable, day) %>%
+  group_by(vegetable, day) %>% #"for each" = group by
   mutate(wt_lbs = weight * 0.00220462) %>%
   summarize(total_weight = sum(wt_lbs)) %>%
   pivot_wider(names_from = day,
@@ -465,7 +465,6 @@ One thing that would make this graph better would be if Miniature American Sheph
   19. Create your own! Requirements: use a `join` or `pivot` function (or both, if you'd like), a `str_XXX()` function, and a `fct_XXX()` function to create a graph using any of the dog datasets. One suggestion is to try to improve the graph you created for the Tidy Tuesday assignment. If you want an extra challenge, find a way to use the dog images in the `breed_rank_all` file - check out the `ggimage` library and [this resource](https://wilkelab.org/ggtext/) for putting images as labels.
   
 ```{r}
-
 top_10 <- breed_rank_all %>% 
   slice(1:10) %>%
   select(Breed, `2016 Rank`:`2020 Rank`) 
@@ -474,29 +473,60 @@ new_top_10 <- top_10 %>%
   pivot_longer(ends_with("Rank"), #using pivot_longer to make dataset longer. Reduces columns (turns years into individual row values). Years as variables/columns turns into values of year variable. 
                names_to = "year", 
                values_to = "rank") %>% 
-  mutate(year = str_remove(year, " Rank") %>% #Str function removes Rank from year values. 
-  as.numeric()) %>% #turns string for year into numeric data. 
+  mutate(year = str_remove(year, " Rank")) %>% #Str function removes Rank from year values. 
+  mutate(year = as.numeric(year)) %>% #turns string for year into numeric data. 
   group_by(Breed) 
 
-new_top_10 
+new_top_10
 
-new_top_10 %>%
-  ggplot(aes(x = year, y = rank, color = fct_reorder2(Breed, year, rank))) +
-  geom_line() +
-  geom_point() +
+
+ggplot(new_top_10, aes(x = year, y = rank, group = Breed)) +
+  geom_line(aes(color = fct_reorder2(Breed, year, rank), alpha = 1), size = 2) +
+  geom_point(aes(color = fct_reorder2(Breed, year, rank), alpha = 1), size = 4) +
   #scale_y_continuous(breaks = 1:nrow(new_top_10)) +
   scale_y_reverse(breaks = 1:nrow(new_top_10)) + #above reverses order on graph, but still in wrong order on legend...
-  #scale_fill_continuous(trans = 'reverse') +
-  #scale_fill_brewer(guide = guide_legend(reverse = TRUE)) +
-  #guides(color = guide_colorbar(reverse = TRUE)) +
+  geom_label(data = new_top_10 %>% filter(year == "2020"), aes(label = Breed, x = 2019.5), size = 2, hjust = 0.5, fontface = "bold") +
+  theme(legend.position = "none") +
   labs(title = "Current Top 10 Dog Breeds Since 2016", 
        x = "Year", 
        y = "Ranking", 
        color = "Breeds")
-#I reordered the breeds in the color legend using fct reorder2, but then reversed the scale to put the 1 ranking at the top, but it doesn't change the order of the legend colors, causing them to still be in reverse order. 
-
+#Would've liked the labels to be on the right, but when I tried that they were cut off. 
 ```
-  
+```{r}
+# #Draft
+# top_10 <- breed_rank_all %>% 
+#   slice(1:10) %>%
+#   select(Breed, `2016 Rank`:`2020 Rank`) 
+#   
+# new_top_10 <- top_10 %>% 
+#   pivot_longer(ends_with("Rank"), #using pivot_longer to make dataset longer. Reduces columns (turns years into individual row values). Years as variables/columns turns into values of year variable. 
+#                names_to = "year", 
+#                values_to = "rank") %>% 
+#   mutate(year = str_remove(year, " Rank") %>% #Str function removes Rank from year values. 
+#   as.numeric()) %>% #turns string for year into numeric data. 
+#   group_by(Breed) %>%
+#   arrange(rank)
+# 
+# new_top_10 
+# 
+# 
+# new_top_10 %>%
+#   ggplot(aes(x = year, y = rank, color = fct_reorder2(Breed, year, rank))) +
+#   geom_line() +
+#   geom_point() +
+#   #scale_y_continuous(breaks = 1:nrow(new_top_10)) +
+#   scale_y_reverse(breaks = 1:nrow(new_top_10)) + #above reverses order on graph, but still in wrong order on legend...
+#   #scale_fill_continuous(trans = 'reverse') +
+#   #scale_fill_brewer(guide = guide_legend(reverse = TRUE)) +
+#   #guides(color = guide_colorbar(reverse = TRUE)) +
+#   labs(title = "Current Top 10 Dog Breeds Since 2016", 
+#        x = "Year", 
+#        y = "Ranking", 
+#        color = "Breeds")
+# #I reordered the breeds in the color legend using fct reorder2, but then reversed the scale to put the 1 ranking at the top, but it doesn't change the order of the legend colors, causing them to still be in reverse order.
+```
+
 ## GitHub link
 
   20. Below, provide a link to your GitHub page with this set of Weekly Exercises. Specifically, if the name of the file is 03_exercises.Rmd, provide a link to the 03_exercises.md file, which is the one that will be most readable on GitHub.
