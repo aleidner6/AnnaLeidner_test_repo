@@ -191,7 +191,7 @@ garden_harvest %>%
   filter(row_number()==1) %>%
   distinct(low_variety, vegetable, .keep_all = TRUE) %>%
   mutate(is_er = str_detect(low_variety, "er")) %>%
-  mutate(is_ar = str_detect(low_variety, "ar")) 
+  mutate(is_ar = str_detect(low_variety, "ar"))
 ```
 
 <div data-pagedtable="false">
@@ -831,8 +831,10 @@ Trips %>%
   left_join(Stations, 
             by = c("sstation" = "name")) %>%
   group_by(lat, long) %>%
-  ggplot(aes(x = long, y = lat)) + 
-  geom_count(shape = 1) +
+  summarize(n = n(), 
+            prop_casual = mean(client == "Casual")) %>%
+  ggplot(aes(x = long, y = lat, color = n)) + 
+  geom_point(alpha = 0.8, shape = 17) +
   labs(title = "Total Number of Departures by Station Location", 
        x = "Latitude", 
        y =  "Longitude") +
@@ -850,8 +852,10 @@ Trips %>%
   left_join(Stations, 
             by = c("sstation" = "name")) %>%
   group_by(lat, long) %>%
-  ggplot(aes(x = long, y = lat, color = client)) + 
-  geom_count(shape = 1) +
+  summarize(n = n(), 
+            prop_casual = mean(client == "Casual")) %>% 
+  ggplot(aes(x = long, y = lat, color = prop_casual)) + 
+  geom_point(alpha = 0.8, shape = 17) +
   labs(title = "Total Number of Departures by Station Location", 
        x = "Latitude", 
        y =  "Longitude") +
